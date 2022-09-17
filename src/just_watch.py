@@ -76,6 +76,10 @@ class JustWatchData:
     def get_other_details(self, soup: BeautifulSoup):
         """Get Show/Movie Other Details from Details Page"""
         results: dict = {}
+        self.rating = ""
+        self.genres = ""
+        self.runtime = ""
+        self.director = ""
         for element in soup.select("div[class='detail-infos']"):
             label_element = element.select_one(
                 "div[class='detail-infos__subheading']")
@@ -93,6 +97,7 @@ class JustWatchData:
 
     def get_synopsis(self, soup: BeautifulSoup):
         """Get Show/Movie Synopsis from Details Page"""
+        self.synopsis = ""
         for element in soup.select("h2[class='detail-infos__subheading--label']"):
             if element.text == "Synopsis":
                 prev_element = element.previous_element.previous_element
